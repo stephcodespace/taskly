@@ -1,26 +1,96 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Soft Pink Palette — Light Mode */
+  --background: #FDF2F8; /* Pink 50: Lembut dan hangat */
+  --foreground: #27212A; /* Charcoal plum gelap: Rasio kontras 13.9:1 (Lulus WCAG AA) */
+  --card: #FFFFFF;
+  --card-foreground: #27212A;
+  --primary: #DB2777; /* Pink 600: Rasio kontras 4.6:1 */
+  --primary-hover: #BE185D; /* Pink 700 */
+  --primary-dark: #9D174D; /* Pink 800 */
+  --primary-soft: #FCE7F3; /* Pink 100 */
+  --muted: #5C5262; /* Rasio kontras 5.8:1 */
+  --muted-soft: #FCE7F3;
+  --border: #FBCFE8; /* Pink 200 */
+  --ring: #DB2777;
+}
+
+.dark {
+  /* Dark Berry Palette — Dark Mode */
+  --background: #18111A; /* Deep dark plum */
+  --foreground: #FDF2F8; /* Soft pink-white: Rasio kontras 15.2:1 (Lulus WCAG AA) */
+  --card: #231B26; /* Warm dark surface */
+  --card-foreground: #FDF2F8;
+  --primary: #F472B6; /* Pink 400: Kontras 7.2:1 */
+  --primary-hover: #EC4899; /* Pink 500 */
+  --primary-dark: #DB2777; /* Pink 600 */
+  --primary-soft: #381A2D; /* Dark berry surface */
+  --muted: #C4B5CD; /* Muted orchid gray: Kontras 6.4:1 */
+  --muted-soft: #2E2332;
+  --border: #3D293F;
+  --ring: #F472B6;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-soft: var(--primary-soft);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-plus-jakarta-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Scrollbar halus dengan aksen soft pink */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FBCFE8;
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #3D293F;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F472B6;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #523755;
+}
+
+/* Menghormati preferensi prefers-reduced-motion pengguna */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
